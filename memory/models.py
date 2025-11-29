@@ -33,6 +33,8 @@ class Book(models.Model):
         related_name="publication_langauges",
         related_query_name="publication_languages"
     )
+    container = models.ForeignKey(
+        "Container", on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.title}"
@@ -88,7 +90,6 @@ class Category(models.Model):
 
 
 class Container(models.Model):
-    book = models.OneToOneField(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     note_card = models.ForeignKey(NoteCard, on_delete=models.CASCADE)
     categories = models.ManyToManyField(
@@ -97,7 +98,7 @@ class Container(models.Model):
         related_query_name="categories")
 
     def __str__(self):
-        return f"{self.book.title} Container"
+        return f"{self.user} Container"
 
 
 class Categorisation(models.Model):
