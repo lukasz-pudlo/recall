@@ -1,5 +1,5 @@
 from django.contrib import admin
-from memory.models import PublicationLanguage, Author, Book, Authorship, Note
+from memory.models import PublicationLanguage, Author, Book, Authorship, Note, NoteCard
 
 
 class PublicationLanguageAdmin(admin.ModelAdmin):
@@ -35,3 +35,10 @@ class NoteAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Note, NoteAdmin)
+
+
+class NoteCardAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(NoteCard, NoteCardAdmin)

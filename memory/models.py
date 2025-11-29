@@ -58,3 +58,19 @@ class Note(models.Model):
             return f"{self.user.first_name}'s note about {self.book.title}"
         else:
             return f"{self.user}'s note about {self.book.title}"
+
+
+class NoteCard(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    note = models.ForeignKey(
+        Note, on_delete=models.SET_NULL, blank=True, null=True)
+    book = models.ForeignKey(
+        Book, on_delete=models.CASCADE
+    )
+    notecard_text = models.TextField(blank=True)
+
+    def __str__(self):
+        if self.note:
+            return f"Note card related to {self.note}"
+        else:
+            return f"Note card related to {self.book.title}"
