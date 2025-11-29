@@ -1,6 +1,7 @@
 from django.db import models
 
 from recall import settings
+from django.contrib.auth.models import User
 
 
 def get_publication_languages():
@@ -43,3 +44,17 @@ class Authorship(models.Model):
 
     def __str__(self):
         return f"{self.author} - {self.book}"
+
+
+class Note(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+    note_text = models.TextField(blank=True)
+
+    def __str__(self):
+        if self.user.first_name:
+            return f"{self.user.first_name}'s note about {self.book.title}"
+        else:
+            return f"{self.user}'s note about {self.book.title}"
