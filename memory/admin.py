@@ -1,5 +1,6 @@
 from django.contrib import admin
-from memory.models import PublicationLanguage, Author, Book, Authorship, Note, NoteCard
+from memory.models import PublicationLanguage, Author, Book, \
+    Authorship, Note, NoteCard, Category, Container, Categorisation
 
 
 class PublicationLanguageAdmin(admin.ModelAdmin):
@@ -42,3 +43,24 @@ class NoteCardAdmin(admin.ModelAdmin):
 
 
 admin.site.register(NoteCard, NoteCardAdmin)
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Category, CategoryAdmin)
+
+
+class ContainerAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Container, ContainerAdmin)
+
+
+class CategorisationAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Categorisation, CategorisationAdmin)

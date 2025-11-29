@@ -74,3 +74,35 @@ class NoteCard(models.Model):
             return f"Note card related to {self.note}"
         else:
             return f"Note card related to {self.book.title}"
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, blank=True)
+    descrption = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name_plural = "categories"
+
+    def __str__(self):
+        return self.name
+
+
+class Container(models.Model):
+    book = models.OneToOneField(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    note_card = models.ForeignKey(NoteCard, on_delete=models.CASCADE)
+    categories = models.ManyToManyField(
+        Category,
+        related_name="categories",
+        related_query_name="categories")
+
+    def __str__(self):
+        return f"{self.book.title} Container"
+
+
+class Categorisation(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    container = models.ForeignKey(Container, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.category} - {self.container}"
