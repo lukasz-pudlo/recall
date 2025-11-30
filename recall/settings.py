@@ -126,4 +126,5 @@ PUBLICATION_LANGUAGES = {
     'PL': 'Polish',
     'EN': 'English',
     'FR': 'French',
+    'DE': 'German',
 }
